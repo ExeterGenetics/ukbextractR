@@ -138,14 +138,7 @@ read_cancer <- function(codes,file='cancer_participant.csv') {
   return(long_data)
 }
 
-
-read_individual <- function(eid,source) {
-  codes <- gsub("\\.", "", eid)
-  grep_codes(eid,source)
-  data=read.csv('temp.tsv',sep='\t')
-  return(data)
-}
-
 print('Thank you for using ukbextractR Version 1.0, by Harry Green, and ukbrapR by Luke Pilling, University of Exeter')
 
 print('For any issues, please contact Harry Green at h.d.green@exeter.ac.uk')
+
