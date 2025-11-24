@@ -57,9 +57,17 @@ The function `read_OPCS` reads from the operations and procedure codes in OPCS4 
 
 No individual eids should ever be present in any script. But this can be done by using `grep` on the tsv file you're interested in.
 
-#### What happened to the baseline_table from your old scripts?
+#### I used your old repo a lot, why the change?
 
-That has been removed from this version. It relied on a preformatted table which was held in my project. Removing it means individuals from outside of Exeter can use this package in its full functionality without needing the point and click interface.
+The old version required me to produce csvs of all the healthcare records in my project, and everyone that wanted to use it needed viewership access (and also to be on project 103356). It also required the point and click interface, which is bad for reproducibility. Removing it means people from outside of Exeter can use this package in its full functionality without needing the point and click interface.
+
+#### Do I need to do anything different?
+
+You should be able to use `read_ICD9`, `read_ICD10`, `read_GP`, `read_cancer` and `read_OPCS` the same as before. The only difference is the columns that are outputted, notably it doesn't join with the baseline_table so it doesn't automatically attach the assessment centre date and age at record.
+
+#### What happened to the baseline_table?
+
+That has been removed from this version. It relied on a preformatted table which was held in my project. I haven't yet worked this into the new setup.
 
 #### It triggered an error
 
