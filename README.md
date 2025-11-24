@@ -57,6 +57,10 @@ The function `read_OPCS` reads from the operations and procedure codes in OPCS4 
 
 No individual eids should ever be present in any script. But this can be done by using `grep` on the tsv file you're interested in.
 
+#### Do you have a quick way of running the setup scripts?
+
+Not yet. I used to have a script that would directly run an r script from github, but this repo is currently private while it's still in development.
+
 #### I used your old repo a lot, why the change?
 
 The old version required me to produce csvs of all the healthcare records in my project, and everyone that wanted to use it needed viewership access (and also to be on project 103356). It also required the point and click interface, which is bad for reproducibility. Removing it means people from outside of Exeter can use this package in its full functionality without needing the point and click interface.
