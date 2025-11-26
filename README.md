@@ -1,7 +1,7 @@
 # ukbextractR
 `ukbextractR` — Reproducible Extraction of Linked Healthcare Records from UK Biobank
 
-* Author: Harry Green
+* Authors: Harry Green and Jiaqi Li
 * Affiliation: University of Exeter
 * Contact: h.d.green@exeter.ac.uk
 
