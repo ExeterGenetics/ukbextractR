@@ -15,6 +15,8 @@ Before using `ukbextractR` functions, you'll need to have extracted the healthca
 source(https://raw.githubusercontent.com/ExeterGenetics/ukbextractR/main/create_tables.R)
 ```
 
+If any new data is released, and oyu want to update your project, delete the `ukbrapr_data` folder in your persistent storage and run the above command again.
+
 ## Session Setup (session_setup.R)
 
 Running `session_setup.R` at the start of an RStudio Workbench session will move the created .tsvs onto your instance and create a number of functions available for use. This can be run from RStudio Workbench using
