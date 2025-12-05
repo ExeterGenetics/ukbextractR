@@ -107,7 +107,6 @@ read_GP <- function(codes,table='clinical') {
     data=data[match_read2|match_bnf|match_dmd,]
     
   }
-
   return(baseline_combo(data,'event_dt'))
 }
 
@@ -141,6 +140,7 @@ read_cancer <- function(codes,file='cancer_participant.csv') {
       values_from = value
     )
   names(long_data)=c('eid','instance','date','ICD10','age','histology','behaviour')
+  long_data$date=as.Date(long_data$date)
   long_data=long_data[df_grep(codes,long_data$ICD10),]
   return(baseline_combo(long_data,'date'))
 }
@@ -150,6 +150,7 @@ source('https://raw.githubusercontent.com/ExeterGenetics/ukbextractR/main/baseli
 print('Thank you for using ukbextractR Version 1.0, by Harry Green and Jiaqi Li, and ukbrapR by Luke Pilling, University of Exeter')
 
 print('For any issues, please contact Harry Green at h.d.green@exeter.ac.uk')
+
 
 
 
