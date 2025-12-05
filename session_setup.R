@@ -138,7 +138,10 @@ read_cancer <- function(codes,file='cancer_participant.csv') {
   return(long_data)
 }
 
-print('Thank you for using ukbextractR Version 1.0, by Harry Green, and ukbrapR by Luke Pilling, University of Exeter')
+source('https://raw.githubusercontent.com/ExeterGenetics/ukbextractR/main/baselline_table.R')
+
+print('Thank you for using ukbextractR Version 1.0, by Harry Green and Jiaqi Li, and ukbrapR by Luke Pilling, University of Exeter')
 
 print('For any issues, please contact Harry Green at h.d.green@exeter.ac.uk')
+
 
