@@ -9,11 +9,19 @@
 
 ## Project Setup (create_tables.R)
 
-Before using `ukbextractR` functions, you'll need to have extracted the healthcare records into your persistent project directory using `create_tables.R`. This will submit a number of `Table Exporter` jobs and create .tsv files in `/ukbrapr_data` in your project directory. This will pull from the latest version of the UK Biobank data. Make sure you only run this script **once** per project. More information on how this works can be found at https://lcpilling.github.io/ukbrapR/.
+Before using `ukbextractR` functions, you'll need to have extracted the healthcare records into your persistent project directory using `create_tables.R`. This will submit a number of `Table Exporter` jobs and create .tsv files in `/ukbrapr_data` in your project directory. This will pull from the latest version of the UK Biobank data. Make sure you only run this script **once** per project. More information on how this works can be found at https://lcpilling.github.io/ukbrapR/. This can be run from RStudio Workbench using
+
+```
+source(https://raw.githubusercontent.com/ExeterGenetics/ukbextractR/main/create_tables.R)
+```
 
 ## Session Setup (session_setup.R)
 
-Running `session_setup.R` at the start of an RStudio Workbench session will move the created .tsvs onto your instance and create a number of functions available for use:
+Running `session_setup.R` at the start of an RStudio Workbench session will move the created .tsvs onto your instance and create a number of functions available for use. This can be run from RStudio Workbench using
+
+```
+source(https://raw.githubusercontent.com/ExeterGenetics/ukbextractR/main/session_setup.R)
+```
 
 ## Available Functions
 
