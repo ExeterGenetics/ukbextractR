@@ -63,11 +63,7 @@ The function `read_OPCS` reads from the operations and procedure codes in OPCS4 
 
 #### How do I find all codes relating to an individual?
 
-No individual eids should ever be present in any script. But this can be done by using `grep` on the tsv file you're interested in.
-
-#### Do you have a quick way of running the setup scripts?
-
-Not yet. I used to have a script that would directly run an r script from github, but this repo is currently private while it's still in development.
+No individual eids should ever be present in any script. But this can be technically done by using `grep` on the tsv file you're interested in.
 
 #### I used your old repo a lot, why the change?
 
