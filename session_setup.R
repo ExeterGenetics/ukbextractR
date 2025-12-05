@@ -42,6 +42,13 @@ df_grep=function(codes,column){
   return(grepl(pattern, column))
 }
 
+baseline_combo <- function(table,date_col){
+  join_table=inner_join(table,baseline%>%select(eid, assess_date_initial,date_of_birth))
+  join_table$prev=join_table[,date_col]<join_table[,'assess_date_initial']
+  join_table$event_age=as.numeric(join_table[,date_col]-join_table[,'date_of_birth'])/365.25
+  return(join_table)
+}
+
 ### Define functions to read from the healthcare records
 
 read_ICD10 <- function(codes){
@@ -58,7 +65,7 @@ read_ICD10 <- function(codes){
   all_data$epistart=as.Date(all_data$epistart)
   all_data$epiend=as.Date(all_data$epiend)
   system('rm joined.tsv')
-  return(all_data)
+  return(baseline_combo(all_data,'epistart'))
 }
 
 read_ICD9 <- function(codes){
@@ -75,7 +82,7 @@ read_ICD9 <- function(codes){
   all_data$epistart=as.Date(all_data$epistart)
   all_data$epiend=as.Date(all_data$epiend)
   system('rm joined.tsv')
-  return(all_data)
+  return(baseline_combo(all_data,'epistart'))
 }
 
 read_GP <- function(codes,table='clinical') {
@@ -101,7 +108,7 @@ read_GP <- function(codes,table='clinical') {
     
   }
 
-  return(data)
+  return(baseline_combo(data,'event_dt'))
 }
 
 read_OPCS <- function(codes) {
@@ -109,7 +116,7 @@ read_OPCS <- function(codes) {
   data=read.csv("temp.tsv",sep='\t')
   data$opdate=as.Date(data$opdate)
   data=data[df_grep(codes,data$oper4),]
-  return(data)
+  return(baseline_combo(all_data,'opdate'))
 }
 
 read_cancer <- function(codes,file='cancer_participant.csv') {
@@ -135,7 +142,7 @@ read_cancer <- function(codes,file='cancer_participant.csv') {
     )
   names(long_data)=c('eid','instance','date','ICD10','age','histology','behaviour')
   long_data=long_data[df_grep(codes,long_data$ICD10),]
-  return(long_data)
+  return(baseline_combo(long_data,'date'))
 }
 
 source('https://raw.githubusercontent.com/ExeterGenetics/ukbextractR/main/baselline_table.R')
@@ -143,5 +150,6 @@ source('https://raw.githubusercontent.com/ExeterGenetics/ukbextractR/main/basell
 print('Thank you for using ukbextractR Version 1.0, by Harry Green and Jiaqi Li, and ukbrapR by Luke Pilling, University of Exeter')
 
 print('For any issues, please contact Harry Green at h.d.green@exeter.ac.uk')
+
 
 
