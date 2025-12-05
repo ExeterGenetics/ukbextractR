@@ -75,7 +75,7 @@ You should be able to use `read_ICD9`, `read_ICD10`, `read_GP`, `read_cancer` an
 
 #### What happened to the baseline_table?
 
-That has been removed from this version. It relied on a preformatted table which was held in my project. I haven't yet worked this into the new setup.
+That has been removed from this version. It relied on a preformatted table which was held in my project. The only baseline table which is now called in automatically contains dates of birth and assessment centre.
 
 #### It triggered an error
 
