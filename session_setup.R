@@ -115,7 +115,7 @@ read_OPCS <- function(codes) {
   data=read.csv("temp.tsv",sep='\t')
   data$opdate=as.Date(data$opdate)
   data=data[df_grep(codes,data$oper4),]
-  return(baseline_combo(all_data,'opdate'))
+  return(baseline_combo(data,'opdate'))
 }
 
 read_cancer <- function(codes,file='cancer_participant.csv') {
@@ -150,6 +150,7 @@ source('https://raw.githubusercontent.com/ExeterGenetics/ukbextractR/main/baseli
 print('Thank you for using ukbextractR Version 1.0, by Harry Green and Jiaqi Li, and ukbrapR by Luke Pilling, University of Exeter')
 
 print('For any issues, please contact Harry Green at h.d.green@exeter.ac.uk')
+
 
 
 
