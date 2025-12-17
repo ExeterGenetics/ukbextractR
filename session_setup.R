@@ -44,8 +44,8 @@ df_grep=function(codes,column){
 
 baseline_combo <- function(table,date_col){
   join_table=inner_join(table,baseline%>%select(eid, assess_date_initial,date_of_birth))
-  join_table$prev=join_table[,date_col]<join_table[,'assess_date_initial']
-  join_table$event_age=as.numeric(join_table[,date_col]-join_table[,'date_of_birth'])/365.25
+  join_table$prev=join_table[[date_col]]<join_table[['assess_date_initial']]
+  join_table$event_age=as.numeric(join_table[[date_col]]-join_table[['date_of_birth']])/365.25
   return(join_table)
 }
 
@@ -150,6 +150,7 @@ source('https://raw.githubusercontent.com/ExeterGenetics/ukbextractR/main/baseli
 print('Thank you for using ukbextractR Version 1.0, by Harry Green and Jiaqi Li, and ukbrapR by Luke Pilling, University of Exeter')
 
 print('For any issues, please contact Harry Green at h.d.green@exeter.ac.uk')
+
 
 
 
