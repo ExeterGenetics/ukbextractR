@@ -15,7 +15,7 @@ Before using `ukbextractR` functions, you'll need to have extracted the healthca
 source('https://raw.githubusercontent.com/ExeterGenetics/ukbextractR/main/create_tables.R')
 ```
 
-If any new data is released, and oyu want to update your project, delete the `ukbrapr_data` folder in your persistent storage and run the above command again.
+If any new data is released, and you want to update your project, delete the `ukbrapr_data` folder in your persistent storage and run the above command again.
 
 ## Session Setup (session_setup.R)
 
