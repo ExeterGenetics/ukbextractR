@@ -145,11 +145,20 @@ read_cancer <- function(codes,file='cancer_participant.csv') {
   return(baseline_combo(long_data,'date'))
 }
 
+read_SR=function(SR_codes){
+	grep_codes(SR_codes,'selfrep_illness.tsv')
+	sr=read.table('temp.tsv',sep='\t',header=T)
+	cols_20002 <- grepl("20002", names(sr))
+	sr2=sr %>% filter(if_any(contains("20002"), ~ .x == SR_codes))
+	return(sr2)
+}
+
 source('https://raw.githubusercontent.com/ExeterGenetics/ukbextractR/main/baseline_table.R')
 
 print('Thank you for using ukbextractR Version 1.0, by Harry Green and Jiaqi Li, and ukbrapR by Luke Pilling, University of Exeter')
 
 print('For any issues, please contact Harry Green at h.d.green@exeter.ac.uk')
+
 
 
 
