@@ -30,6 +30,7 @@ collapse_codes=function(codes){
 
 grep_codes=function(codes,filename){
   # this function builds a grep of the file using a code list (should be a list). It outputs the file to temp.tsv and attaches the original header back on
+  if (codes[1]==''){codes='blankcode'} # if people input nothing, the grepcode breaks, this seems to be a reliable fix
   grep_command=paste("grep -E", shQuote(collapse_codes(codes)), filename, " > temp.tsv")
   header_attach=paste("head -n 1 ", filename, " > temp2.tsv && cat temp.tsv >> temp2.tsv && mv temp2.tsv temp.tsv")
   system(grep_command)
@@ -122,6 +123,24 @@ read_cancer <- function(codes,file='cancer_participant.csv') {
   codes <- gsub("\\.", "", codes) # cancer registry data doesn't have the . in the ICD10 code
   grep_codes(codes,'cancer_registry.tsv')
   data=read.csv('temp.tsv',sep='\t')
+  # The rest of the code relies on a pivot table which breaks if no data matches the ICD10 code
+  if (nrow(data)==0){
+    empty_df <- data.frame(
+      eid                = integer(),
+      instance           = integer(),
+      date               = as.Date(character()),
+      ICD10              = character(),
+      age                = character(),
+      histology          = character(),
+      behaviour          = character(),
+      assess_date_initial = as.Date(character()),
+      date_of_birth      = as.Date(character()),
+      prev               = logical(),
+      event_age          = numeric(),
+      stringsAsFactors = FALSE
+    )
+    return(empty_df)
+  }
   long_data <- data %>%
     pivot_longer(
       cols = matches("^p\\d+_i\\d+$"),
@@ -169,18 +188,29 @@ read_death <- function(codes){
   return(baseline_combo(all_data,'date_of_death'))
 }
 
+first_occurence=function(ICD10='',GP='',OPCS='',cancer='',death=''){
+  ICD10_records=read_ICD10(ICD10)%>%mutate(date=epistart)%>%select(eid,date)%>%mutate(source='HES')
+  OPCS_records=read_OPCS(OPCS)%>%mutate(date=opdate)%>%select(eid,date)%>%mutate(source='OPCS')
+  GP_records=read_GP(GP)%>%mutate(date=event_dt)%>%select(eid,date)%>%mutate(source='GP')
+  cancer_records=read_cancer(cancer)%>%mutate(date=date)%>%select(eid,date)%>%mutate(source='Cancer_Registry')
+  death_records=read_death(death)%>%mutate(date=date_of_death)%>%select(eid,date)%>%mutate(source='Death Records')
+  all_records=rbind(ICD10_records,OPCS_records)%>%
+    rbind(GP_records)%>%
+    rbind(cancer_records)%>%
+    rbind(death_records)%>%
+    mutate(date=as.Date(date))
+  all_records=all_records%>%
+    group_by(eid)%>%
+    top_n(-1,date)%>%
+    distinct()
+  return(all_records)
+}
+
 
 source('https://raw.githubusercontent.com/ExeterGenetics/ukbextractR/main/baseline_table.R')
 
 print('Thank you for using ukbextractR Version 1.0, by Harry Green and Jiaqi Li, and ukbrapR by Luke Pilling, University of Exeter')
 
 print('For any issues, please contact Harry Green at h.d.green@exeter.ac.uk')
-
-
-
-
-
-
-
 
 
