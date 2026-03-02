@@ -5,6 +5,8 @@
 * Affiliation: University of Exeter
 * Contact: h.d.green@exeter.ac.uk
 
+**Terms of use:** This software has been provided free of charge for the academic community. In return, the only requirement is that you make your code openly available in kind for any paper that uses my functions, and acknowledge (ideally, cite) this repository in your work.
+
 `ukbextractR` is a lightweight suite of functions designed to reproducibly extract UK Biobank–linked healthcare records (HES inpatient, HES episodes, GP records, cancer registry, and OPCS procedure data) for downstream epidemiological and genetic analyses. This workflow is intended for use within the UK Biobank Research Analysis Platform (DNAnexus) and relies on Luke Pilling's `ukbrapR` package to export the raw tables into persistent project storage.
 
 ## Project Setup (create_tables.R)
