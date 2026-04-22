@@ -119,8 +119,10 @@ read_OPCS <- function(codes) {
   return(baseline_combo(data,'opdate'))
 }
 
-read_cancer <- function(codes,file='cancer_participant.csv') {
-  codes <- gsub("\\.", "", codes) # cancer registry data doesn't have the . in the ICD10 code
+read_cancer <- function(icd10='', icd9 = '', file = 'cancer_registry.tsv') {
+  if (icd9[1]==''){codes <- gsub("\\.", "", icd10)}
+  if (icd10[1]==''){codes <- gsub("\\.", "", icd9)}
+  if (!(icd9[1]==''|icd10[1]=='')){codes <- gsub("\\.", "", c(icd9,icd10))}
   grep_codes(codes,'cancer_registry.tsv')
   data=read.csv('temp.tsv',sep='\t')
   # The rest of the code relies on a pivot table which breaks if no data matches the ICD10 code
@@ -158,9 +160,9 @@ read_cancer <- function(codes,file='cancer_participant.csv') {
       names_from = field,
       values_from = value
     )
-  names(long_data)=c('eid','instance','date','ICD10','age','histology','behaviour')
+  names(long_data)=c('eid','instance','date','ICD10','age','histology','behaviour','ICD9')
   long_data$date=as.Date(long_data$date)
-  long_data=long_data[df_grep(codes,long_data$ICD10),]
+  long_data=long_data[df_grep(codes,long_data$ICD10) | long_data$ICD9%in%icd9,]
   return(baseline_combo(long_data,'date'))
 }
 
