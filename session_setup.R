@@ -7,7 +7,7 @@ for (pkg in packages) {
   }
   library(pkg, character.only = TRUE)
 }
-remotes::install_github("lcpilling/ukbrapR")
+remotes::install_github("lcpilling/ukbrapR#41")
 library('ukbrapR')
 
 dxdownload=function(filepath){
