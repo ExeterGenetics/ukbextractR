@@ -4,7 +4,7 @@
 
 
 if (!file.exists('/mnt/project/ukbrapr_data/hesin.tsv')){
-  remotes::install_github("lcpilling/ukbrapR")
+  remotes::install_github("lcpilling/ukbrapR#41")
   library('ukbrapR')
   ukbrapR:::export_tables(submit=TRUE)
 }
