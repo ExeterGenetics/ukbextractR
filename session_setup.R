@@ -162,7 +162,7 @@ read_cancer <- function(icd10='', icd9 = '', file = 'cancer_registry.tsv') {
     )
   names(long_data)=c('eid','instance','date','ICD10','age','histology','behaviour','ICD9')
   long_data$date=as.Date(long_data$date)
-  long_data=long_data[df_grep(codes,long_data$ICD10) | long_data$ICD9%in%icd9,]
+  long_data=long_data[df_grep(codes,long_data$ICD10) | df_grep(codes,long_data$ICD9),]
   return(baseline_combo(long_data,'date'))
 }
 
